@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<body>
+<header>
+  <% include ./partials/_header %>
+</header>
+</head>
+  <title>List of URL</title>
+<ul>
+<code><% for (x in urls) { %> <br><br>
+  <li><%= x %> - <a href=<%= urls[x] %>><%= urls[x] %></a></li>
+    <form style = "margin:20px;" method="POST" action=/urls/<%= x %>>
+     <a href="/urls/<%= x %>">Edit</a>
+    <form method="POST" action=/urls/<%= x %>/delete><button type="delete">Delete</button></form>
+  <% } %>
+    </form>
+  <br><br>
+</code>
+</ul>
+<a href="/urls/new/">Click here to create new url</a>
+</body>
+</html>

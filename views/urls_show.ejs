@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<body>
+<header>
+        <% include ./partials/_header %>
+</header>
+</head>
+<body>
+<h3>List of Urls:</h3>
+<ul>
+  <li><%= shortURL %> - <%= urls[shortURL] %></li>
+</ul><br><br><br><br><br><br>
+<h2>Update Url here:</h2>
+  <form method="POST" style="margin:150px;"" action="/urls/<%= shortURL %>">
+    <label for="longURL">Enter a URL to Update:</label>
+    <input id="longURL" type="text" name="longURL" placeholder="http://" style="width: 300px">
+    <input type="submit" value="Submit">
+  </form>
+<br>
+<br>
+<a href="/urls/new/">Click here to create new url</a><br><br>
+<a href="/urls/">Click here to view list of url</a>
+</body>
+</html>
