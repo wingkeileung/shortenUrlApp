@@ -1,7 +1,7 @@
 var express = require("express");
+var cookieParser = require('cookie-parser');
 var app = express();
 var PORT = process.env.PORT || 8080;
-
 
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
@@ -18,21 +18,27 @@ function generateRandomString() {
 }
 
 const bodyParser = require("body-parser");
-
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.end("Hello!");
+  let templateVars = { urls: urlDatabase,
+                       username: req.cookies['username']};
+  res.end("Hello! ");
 });
 
 app.get("/urls.json", (req, res) => {
-  res.json(urlDatabase);
+  let templateVars = { urls: urlDatabase,
+                       username: req.cookies['username']};
+  res.json(urlDatabase, templateVars);
 });
 
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let templateVars = { urls: urlDatabase,
+                       username: req.cookies['username']};
+  res.render("urls_new", templateVars);
 });
 
 app.post("/urls", (req, res) => {
@@ -42,17 +48,30 @@ app.post("/urls", (req, res) => {
 });
 
 app.get("/urls", (req, res) => {
-  let templateVars = { urls: urlDatabase };
+  let templateVars = { urls: urlDatabase,
+                       username: req.cookies['username']};
   res.render("urls_index", templateVars);
 });
 
+app.get("urls/:id", (req, res) => {
+  let templateVars = {  shortURL: req.params.id,
+                        urls: urlDatabase,
+                        username: req.cookies['username']};
+  res.render("urls_index", templateVars);
+});
+
+app.post("/login", (req, res) => {
+  res.cookie("username", req.body.username);
+  res.redirect("/urls");
+});
+
 app.get("/urls/:id", (req, res) => {
- const templateVars = { shortURL: req.params.id, urls: urlDatabase };
- res.render("urls_show", templateVars);
+  const templateVars = { shortURL: req.params.id, urls: urlDatabase, username: req.cookies['username']};
+  res.render("urls_show", templateVars);
 });
 
 app.post("/urls/:id/delete", (req, res) => {
-   delete urlDatabase[req.params.id];
+  delete urlDatabase[req.params.id];
   res.redirect('/urls');
 });
 
