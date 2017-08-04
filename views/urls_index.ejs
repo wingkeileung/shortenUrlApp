@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
 <header>
-  <!-- <% include partials/_header %> -->
+  <% include ./partials/_header %>
 </header>
 </head>
+
 <body>
   <title>List of URL</title>
-<ul>
-<code><% for (x in urls) { %> <br><br>
-  <li><%= x %> - <a href=<%= urls[x] %>><%= urls[x].address %></a></li>
-     <a href="/urls/<%= x %>"><button>Edit</button></a>
-    <form method="POST" action="/urls/<%= x %>/delete"><button type="delete">Delete</button></form>
-  <% } %>
-  <br><br>
-</code>
+  <ul>
+  <code><% for (const url in urls) { %> <br><br>
+    <li><%= url %> - <a href=<%= urls[url].address %>><%= urls[url].address %></a></li>
+      <a href="/urls/<%= url %>"><button>Edit</button></a>
+      <form method="POST" action="/urls/<%= url %>/delete"><button type="delete">Delete</button></form>
+    <% } %><br><br>
+  </code>
 </ul>
 
 <br><br><br><br>

@@ -1,8 +1,8 @@
 <H3><header>Wecome to Tiny URL App</header></H3>
-<% if(user_id) { %>
+<% if(user) { %> <h2> <%= user["email"] %></h2>
 <form method="POST" action=/logout>
-<button type="delete">Logout</button></form>
+<button type="submit">Logout</button></form>
 <% } else { %>
 <h9><button><a href="/register">Register here</a></button></h9>
-<h9><button><a href="/login">Or Login here</a></button></h9>
+<h9><button><a href="/login">Login here</a></button></h9>
 <% } %>

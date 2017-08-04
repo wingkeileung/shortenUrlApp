@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <% include partials/_header %> -->
+    <% include partials/_header %>
   </head>
+<% if(user) { %>
+<h3> Login  </h3>
+  <form method="POST" action="/logout">
+    <button type="delete">Log Out</button> </form>
+<% } else { %>
 <form action="/login" method="POST" style="margin:150px;">
   <h1>Login</h1>
       <input type="email" name="email" placeholder="Enter your Email login" style="width: 150px">
       <input type="password" name="password" placeholder="Enter Password" style="width: 150px">
       <button type="submit">Submit</button>
   </form>
+<% } %>
 <br><br><br><br>
 <h5><button><a href="/urls">View URLS</a></button></h5>
 <h5><button><a href="/urls">Create URLS</a></button></h5>
