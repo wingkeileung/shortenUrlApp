@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head></head>
 <body>
-<header>
-        <% include ./partials/_header %>
-</header>
-</head>
-<body>
+  <% include ./partials/_header %>
 <h3>List of Urls:</h3>
 <ul>
-  <li><%= shortURL %> - <%= urls[shortURL] %></li>
-</ul><br><br><br><br><br><br>
+  <li><%= shortURL %> - <%= urls[shortURL].address %></li>
+</ul>
+<br><br><br><br><br><br>
 <h2>Update Url here:</h2>
   <form method="POST" style="margin:150px;"" action="/urls/<%= shortURL %>">
     <label for="longURL">Enter a URL to Update:</label>
