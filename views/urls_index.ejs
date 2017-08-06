@@ -10,7 +10,7 @@
   <title>List of URL</title>
   <ul>
   <code><% for (const url in urls) { %> <br><br>
-    <li><%= url %> - <a href=<%= urls[url].address %>><%= urls[url].address %></a></li>
+    <li><%= url %> - <a href=<%= urls[url]['longURL'] %>><%= urls[url]['longURL'] %></a></li>
       <a href="/urls/<%= url %>"><button>Edit</button></a>
       <form method="POST" action="/urls/<%= url %>/delete"><button type="delete">Delete</button></form>
     <% } %><br><br>
