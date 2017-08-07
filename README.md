@@ -4,7 +4,8 @@ TinyApp is a fullstack web application built with Node and Express that allows u
 
 Final Product
 
-["Screenshot of Login Page"] (https://github.com/wingkeileung/tiny_URL_app/blob/master/docs/Screen%20Shot%202017-08-06%20at%208.59.02%20PM.png)
+["Screenshot of Login Page"] 
+<img src="https://github.com/wingkeileung/tiny_URL_app/blob/master/docs/Screen%20Shot%202017-08-06%20at%208.59.02%20PM.png" alt="Home page" style="max-width:100%;"></a>
 
 [ "Screenshot of URL Page" ] (https://github.com/wingkeileung/tiny_URL_app/blob/master/docs/Screen%20Shot%202017-08-06%20at%209.00.15%20PM.png)
 
