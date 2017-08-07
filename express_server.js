@@ -75,18 +75,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  const user = req.session.user_id;
-  if (user) {
-    let templateVars = {
-      username: req.session.user_id,
+  let templateVars = {username: req.session.user_id,
+      shortURL: req.params.id,
+      urls: urlDatabase,
       users: users,
-      urls: urlDatabase
-    };
-    res.render("login", templateVars);
-  } else {
-    res.redirect("/urls");
-  }
+      user: users[req.session.user_id]};
+  res.redirecter("urls");
 });
+
 
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
@@ -109,7 +105,7 @@ app.get("/urls/new", (req, res) => {
 app.post("/urls", (req, res) => {
   console.log(req.body);
   let uid = generateRandomString();
-  urlDatabase[uid] = {longURL: req.body.longURL, userID: req.session.user_id}
+  urlDatabase[uid] = {longURL: req.body.longURL, userID: req.session.user_id};
   let templateVars = { username: req.session.user_id,
     shortURL: req.params.id,
     urls: urlDatabase,
@@ -121,9 +117,10 @@ app.get("/urls", (req, res) => {
   const username = req.session.user_id;
   var urls = urlsForUserID(username);
   let templateVars = { username: username,
-                       urls: urls,
-                       users: users
-                      };
+    urls: urls,
+    users: users
+
+  };
   res.render("urls_index", templateVars);
 });
 
@@ -132,10 +129,10 @@ app.get("/login", (req, res) =>{
     res.redirect('/urls');
   } else {
     let templateVars = {username: req.session.user_id,
-                        shortURL: req.params.id,
-                        urls: urlDatabase,
-                        users: users,
-                        user: users[req.session.user_id]};
+      shortURL: req.params.id,
+      urls: urlDatabase,
+      users: users,
+      user: users[req.session.user_id]};
     res.render('login', templateVars);
   }
 });
@@ -199,10 +196,10 @@ app.get("/register", (req, res) => {
     res.redirect("/urls");
   } else {
     let templateVars = {username: req.session.user_id,
-                        shortURL: req.params.id,
-                        urls: urlDatabase,
-                        users: users,
-                        user: users[req.session.user_id]};
+      shortURL: req.params.id,
+      urls: urlDatabase,
+      users: users,
+      user: users[req.session.user_id]};
     res.render("reg", templateVars);
   }
 });
@@ -217,8 +214,8 @@ app.post("/register", (req, res) => {
     res.status(400).send("Email already in use");
   } else {
     users[uid] = {id: uid,
-                  email: email,
-                  password: bcrypt.hashSync(password, 10)
+      email: email,
+      password: bcrypt.hashSync(password, 10)
     };
   }
   req.session.user_id = uid;
