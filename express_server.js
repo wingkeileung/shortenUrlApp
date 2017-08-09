@@ -104,6 +104,7 @@ app.get("/urls/new", (req, res) => {
 
 app.post("/urls", (req, res) => {
   // console.log(req.body);
+<<<<<<< HEAD
   let longURL = req.body.longURL;
   if (!longURL.includes("http://")) {
     console.log("does not have http://");
@@ -111,6 +112,10 @@ app.post("/urls", (req, res) => {
   } // ensure longURL always have http:// in it before database
   let uid = generateRandomString();
   urlDatabase[uid] = {longURL: longURL, userID: req.session.user_id};
+=======
+  let uid = generateRandomString();
+  urlDatabase[uid] = {longURL: req.body.longURL, userID: req.session.user_id};
+>>>>>>> 14936e18d6e7489fc7e61f03eb25b88749b7af70
   let templateVars = { username: req.session.user_id,
     shortURL: req.params.id,
     urls: urlDatabase,
@@ -175,7 +180,10 @@ app.get("/urls/:id", (req, res) => {
 app.post("/urls/:id", (req, res) => {
   var longURL = urlDatabase[req.params.id].longURL;
   const shortURL = req.params.id;
+<<<<<<< HEAD
   // console.log(urlDatabase[req.params.id].longURL);
+=======
+>>>>>>> 14936e18d6e7489fc7e61f03eb25b88749b7af70
   if (urlDatabase[shortURL]["userID"] === req.session.user_id){
     urlDatabase[req.params.id].longURL = req.body.longURL;
     res.redirect("/urls");
@@ -236,7 +244,11 @@ app.post("/logout", (req, res) => {
 
 app.get("/u/:shortURL", (req, res) => {
   const longURL = urlDatabase[req.params.shortURL].longURL;
+<<<<<<< HEAD
   res.redirect(longURL);
+=======
+  res.redirect("/longURL");
+>>>>>>> 14936e18d6e7489fc7e61f03eb25b88749b7af70
 });
 
 app.get("/hello", (req, res) => {
