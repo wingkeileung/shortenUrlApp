@@ -57,9 +57,11 @@ function urlsForUserID(id) {
   var urlUser = {};
   for (var url_id in urlDatabase) {
     if (urlDatabase[url_id].userID === id) {
+      // console.log("id found");
       urlUser[url_id] = urlDatabase[url_id];
     }
   }
+  // console.log(urlUser);
   return urlUser;
 }
 
@@ -75,14 +77,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  let templateVars = {username: req.session.user_id,
-      shortURL: req.params.id,
-      urls: urlDatabase,
-      users: users,
-      user: users[req.session.user_id]};
-  res.redirecter("urls");
+  if (!req.session.user_id) {
+    res.redirect('/login');
+  } else {
+    res.redirect("/urls");
+  }
 });
-
 
 app.get("/urls.json", (req, res) => {
   res.json(urlDatabase);
@@ -103,7 +103,7 @@ app.get("/urls/new", (req, res) => {
 });
 
 app.post("/urls", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let uid = generateRandomString();
   urlDatabase[uid] = {longURL: req.body.longURL, userID: req.session.user_id};
   let templateVars = { username: req.session.user_id,
@@ -114,18 +114,19 @@ app.post("/urls", (req, res) => {
 });
 
 app.get("/urls", (req, res) => {
+  // console.log(req.session);
   const username = req.session.user_id;
+  // console.log(username);
   var urls = urlsForUserID(username);
   let templateVars = { username: username,
     urls: urls,
     users: users
-
   };
   res.render("urls_index", templateVars);
 });
 
 app.get("/login", (req, res) =>{
-  if (req.session.user_id){
+  if (userFinder(req.session.user_id)){
     res.redirect('/urls');
   } else {
     let templateVars = {username: req.session.user_id,
@@ -192,7 +193,7 @@ app.post("/urls/:id/delete", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-  if (req.session.user_id){
+  if (userFinder(req.session.user_id)){
     res.redirect("/urls");
   } else {
     let templateVars = {username: req.session.user_id,
