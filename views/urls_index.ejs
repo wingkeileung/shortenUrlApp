@@ -10,24 +10,13 @@
   <h2> <% username %></h2>
   <ul>
   <code><% for (const url in urls) { %> <br><br>
-<<<<<<< HEAD
     <li><%= url %> - <a href="<%= urls[url]['longURL'] %>"><%= urls[url]['longURL'] %></a></li>
-=======
-    <li><%= url %> - <a href=<%= urls[url]['longURL'] %>><%= urls[url]['longURL'] %></a></li>
->>>>>>> 14936e18d6e7489fc7e61f03eb25b88749b7af70
       <a href="/urls/<%= url %>"><button>Edit</button></a>
       <form method="POST" action="/urls/<%= url %>/delete"><button type="delete">Delete</button></form>
     <% } %><br><br>
   </code>
 </ul>
 
-<<<<<<< HEAD
 <h5><button><a href="/urls/new">Create URLS</a></button></h5>
 </body>
 </html>
-=======
-<br><br><br><br>
-<h5><button><a href="/urls/new">Create URLS</a></button></h5>
-</body>
-</html>
->>>>>>> 14936e18d6e7489fc7e61f03eb25b88749b7af70
