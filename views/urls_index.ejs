@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<header>
-  <% include ./partials/_header %>
-</header>
+    <% include partials/_header %>
 </head>
-
 <body>
-  <title>List of URL</title>
+<header>
+</header>
+  <H1>List of URL</H1>
+  <h2> <% username %></h2>
   <ul>
   <code><% for (const url in urls) { %> <br><br>
     <li><%= url %> - <a href=<%= urls[url]['longURL'] %>><%= urls[url]['longURL'] %></a></li>
