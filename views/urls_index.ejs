@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/_header %>
+</head>
+<body>
+<header>
+</header>
+  <H1>List of URL</H1>
+  <h2> <% username %></h2>
+  <ul>
+  <code><% for (const url in urls) { %> <br><br>
+    <li><%= url %> - <a href="<%= urls[url]['longURL'] %>"><%= urls[url]['longURL'] %></a></li>
+      <a href="/urls/<%= url %>"><button>Edit</button></a>
+      <form method="POST" action="/urls/<%= url %>/delete"><button type="delete">Delete</button></form>
+    <% } %><br><br>
+  </code>
+</ul>
+
+<h5><button><a href="/urls/new">Create URLS</a></button></h5>
+</body>
+</html>

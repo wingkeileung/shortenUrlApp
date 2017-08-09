@@ -1,0 +1,10 @@
+<H3><header>Wecome to Tiny URL App</header></H3>
+<% if(!users[username]) { %>
+  <h9><button><a href="/register">Register here</a></button></h9>
+  <h9><button><a href="/login">Login here</a></button></h9>
+<% } else { %>
+  <h7>Welcome, <%= users[username]['email'] %></h7>
+    <form method="POST" action=/logout>
+      <button type="submit">Logout</button>
+    </form>
+<% } %>
